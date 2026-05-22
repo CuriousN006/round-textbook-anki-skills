@@ -1,0 +1,7 @@
+interface:
+  display_name: "Round Textbook Anki"
+  short_description: "Build verified Anki cards from round-based textbook PDFs."
+  default_prompt: "Use $round-textbook-anki to create verified Anki notes from this textbook round."
+
+policy:
+  allow_implicit_invocation: true
