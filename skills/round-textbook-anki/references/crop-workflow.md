@@ -37,7 +37,7 @@ Optional fields:
 
 - `note_id`: traceability value copied into the result
 - `front_html`: current front HTML
-- `insert_before`: marker to insert before; defaults to `1.` when `front_html` exists and no marker is specified
+- `insert_before`: marker to insert before; when omitted, the script tries common choice markers such as `①`, `1.`, `1)`, and `(1)`
 - `insert_after`: marker to insert after
 - `style`: custom inline CSS for the `<img>` tag
 

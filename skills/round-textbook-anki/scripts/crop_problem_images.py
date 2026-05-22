@@ -19,7 +19,7 @@ except ImportError as exc:  # pragma: no cover - import guard
 
 
 DEFAULT_STYLE = "max-width:100%; height:auto;"
-DEFAULT_INSERT_BEFORE = "1."
+DEFAULT_INSERT_BEFORE_CANDIDATES = ("①", "1.", "1)", "(1)", "ㄱ.", "가.")
 
 
 def parse_args() -> argparse.Namespace:
@@ -84,7 +84,12 @@ def insert_snippet(front_html: str, snippet: str, item: dict[str, Any]) -> str:
         raise ValueError("Specify only one of insert_before or insert_after.")
 
     if not insert_before and not insert_after:
-        insert_before = DEFAULT_INSERT_BEFORE
+        for marker in DEFAULT_INSERT_BEFORE_CANDIDATES:
+            idx = front_html.find(marker)
+            if idx != -1:
+                return front_html[:idx] + snippet + front_html[idx:]
+        markers = ", ".join(repr(marker) for marker in DEFAULT_INSERT_BEFORE_CANDIDATES)
+        raise ValueError(f"no default insert marker found; tried: {markers}")
 
     if insert_before:
         marker = str(insert_before)

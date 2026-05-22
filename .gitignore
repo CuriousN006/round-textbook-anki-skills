@@ -17,3 +17,5 @@ outputs/
 tmp/
 __pycache__/
 *.pyc
+*.local.json
+source-manifest*.json

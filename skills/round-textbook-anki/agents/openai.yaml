@@ -1,7 +1,7 @@
 interface:
-  display_name: "Round Textbook Anki"
-  short_description: "Build verified Anki cards from round-based textbook PDFs."
-  default_prompt: "Use $round-textbook-anki to create verified Anki notes from this textbook round."
+  display_name: "Textbook Problem Bank Anki"
+  short_description: "Build verified Anki cards from mixed textbook PDF sets."
+  default_prompt: "Use $round-textbook-anki to inventory this textbook source set and create verified Anki notes."
 
 policy:
   allow_implicit_invocation: true
