@@ -40,6 +40,18 @@ Copy-Item -Recurse -Force .\skills\round-textbook-anki "$env:USERPROFILE\.codex\
 
 Then start a new Codex session so the skill list can refresh. In prompts, ask for `$round-textbook-anki` when working on a source folder, textbook, chapter, round, exam packet, or numbered problem batch.
 
+## Anki MCP Setup
+
+The skill can plan card creation and verification, but Codex needs a local Anki bridge before it can actually read or update your Anki collection.
+
+Read [docs/anki-mcp-setup.md](docs/anki-mcp-setup.md) for detailed setup options, including:
+
+- native AnkiMCP add-on setup for local Codex, commonly using `http://127.0.0.1:3141`
+- AnkiConnect plus an MCP wrapper, commonly using `http://127.0.0.1:8765`
+- Codex/MCP config examples
+- PowerShell smoke tests
+- troubleshooting for `502`, `connection refused`, stale tool manifests, and port/variant mix-ups
+
 ## Private Source Configuration
 
 Copy `skills/round-textbook-anki/references/source-details-template.md` to:
