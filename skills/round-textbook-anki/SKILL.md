@@ -62,13 +62,19 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 6. Build notes with stable source traceability. Preserve local numbering conventions such as `01`, `02`, or original exam numbers.
 7. Use solution material only to confirm answers and reasoning. Write the back field in fresh teaching prose instead of copying long passages.
 8. Re-read saved notes from Anki and compare actual stored fields against the intended batch.
+9. If a user points out a card-quality failure, fix that card and then audit all cards with the same pattern, not only the one example.
 
 ## Card Rules
 
 - Keep front fields reviewable: source marker, problem statement or question, needed image, then choices or response format.
-- Keep back fields useful: answer, direct reasoning, formula or definition, symbol meanings, common trap, and source trace when available.
-- For statement-evaluation questions, explain choices in printed order with a clear true/false or correct/incorrect judgment when that adds study value.
-- For calculation questions, keep the main derivation in direct substitution form. Put mnemonics or alternate memory forms in a separate reference section.
+- Keep front fields searchable: OCR or transcribe problem statements and choices into text. Do not embed the whole problem or page image as the review surface.
+- Keep back fields useful: answer, direct reasoning, formula or definition, symbol meanings, common trap, and a human-readable source line when available.
+- Strip visible source/debug artifacts such as `source_id=...`, `type=...`, `scope=...`, `problem=...`, `page=...`, and `answer_checked=...` from the card fields.
+- Put formulas, substitutions, and necessary definitions in the main `풀이`. The `참고` section is only for supplementary traps, comparisons, unit checks, and memory aids.
+- Do not leave renderer placeholders such as `Mathjax`/`MathJax` or broken escape/control characters in saved cards.
+- For statement-evaluation and "correct/incorrect choice" questions, explain choices in printed order with a clear true/false or correct/incorrect judgment and the reason for each choice.
+- Choice explanations must not parrot the printed choice. Explain the principle, formula, unit conversion, classification boundary, or counterexample that makes the choice right or wrong.
+- For calculation questions, keep the main derivation in direct substitution form and split dense formulas into readable steps. Put mnemonics or alternate memory forms in a separate reference section.
 - For interview or concept PDFs, convert into prompt-answer cards, comparison cards, or scenario follow-up cards instead of forcing multiple-choice structure.
 - In Anki HTML, avoid raw `<` and `>` in text or math. Use MathJax commands such as `\lt`, `\gt`, `\le`, and `\ge`.
 - For image HTML, prefer actual dimensions with `max-width:100%; height:auto;`. Avoid fixed CSS that can squash figures.
@@ -78,16 +84,18 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 
 - Read the problem from page images first when the PDF layout contains figures, tables, columns, answer choices, or page banners.
 - Mark OCR-derived fronts with `[OCR]` when the text may need later cleanup.
-- Crop only the figure, formula box, table, graph, or prompt area needed for review.
+- Crop only the figure, formula box, table, graph, or prompt area needed for review. Do not crop the entire problem/page just to avoid OCR.
+- When converting an image-only card to OCR text, remove old whole-problem image references and keep only focused visual crops that the learner actually needs.
 - Re-render at higher DPI before cropping if the crop is too small, blurry, or cut off.
 - Do not generate or redraw technical diagrams from memory when the source figure is accuracy-sensitive. Use the source image or ask the user for the figure.
 
 ## Verification
 
-Treat any answer mismatch, wrong deck, duplicate note, missing note, wrong source scope, broken image reference, or malformed MathJax as a blocker.
+Treat any answer mismatch, wrong deck, duplicate note, missing note, wrong source scope, broken image reference, visible source/debug artifact, malformed MathJax, formula missing from `풀이`, or thin choice explanation as a blocker.
 
 - Re-read saved notes through Anki MCP or AnkiConnect after creating the first few notes of a new source or scope.
 - For a complete batch, compare every saved answer against the matching answer key or solution section before reporting completion.
+- For a complete batch, audit every saved note for searchable text fronts, missing/duplicate numbering, stale whole-page image references, source/debug artifacts, broken MathJax, answer lines that begin with bare MathJax, required formulas in `풀이`, and choice explanations that are too thin or merely repeat the choice.
 - For image cards, confirm the saved field references the actual media filename and preserves aspect ratio.
 - For mixed source roots, report which source IDs were touched and which were only inspected.
 - Report the checked deck name, problem count, changed note IDs when available, and any corrected problem numbers.
