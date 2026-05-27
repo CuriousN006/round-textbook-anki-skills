@@ -4,8 +4,8 @@ Use this before large correction passes and whenever a user reports poor cards. 
 
 ## Direct Review Rule
 
-- Read saved notes through Anki in small batches. Judge the actual `Front` and `Back` fields, not only a generated payload or script output.
-- Use scripts only to find candidates, counts, missing numbers, duplicate numbers, broken image names, or obvious artifact strings.
+- Read saved notes through Anki in small batches. Judge the actual `Front` and `Back` fields, not a generated payload, search result, or mechanical audit.
+- Do not use automated checks as a discovery method for bad explanations. They cannot tell whether reasoning is shallow, copied, misleading, or missing the point.
 - A correction pass is not complete until the suspicious pattern has been checked across the whole affected deck or source.
 
 ## Front Field Checklist

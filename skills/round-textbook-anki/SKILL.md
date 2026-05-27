@@ -63,7 +63,7 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 7. Use solution material only to confirm answers and reasoning. Write the back field in fresh teaching prose instead of copying long passages.
 8. Re-read saved notes from Anki and compare actual stored fields against the intended batch.
 9. If a user points out a card-quality failure, fix that card and then audit all cards with the same pattern, not only the one example.
-10. For correction passes, read the actual saved note text in Anki in small batches. Scripts may identify candidates, counts, or obvious artifacts, but they do not replace semantic review of each card.
+10. For correction passes, read the actual saved note text in Anki in order, in small batches, and judge the Front and Back semantically. Do not claim a quality pass from generated payloads, search results, or mechanical audits.
 
 ## Card Rules
 
@@ -100,7 +100,7 @@ Treat any answer mismatch, wrong deck, duplicate note, missing note, wrong sourc
 - Re-read saved notes through Anki MCP or AnkiConnect after creating the first few notes of a new source or scope.
 - For a complete batch, compare every saved answer against the matching answer key or solution section before reporting completion.
 - For a complete batch, audit every saved note for searchable text fronts, missing/duplicate numbering, stale whole-page image references, source/debug artifacts, broken MathJax, answer lines that begin with bare MathJax, required formulas in `풀이`, and choice explanations that are too thin or merely repeat the choice.
-- For correction work, use Anki readback as the authority. Search/audit scripts can find suspicious notes, but the pass is not complete until the stored Front and Back fields have been read and judged.
+- For correction work, use Anki readback as the authority. The pass is not complete until the stored Front and Back fields have been read and judged semantically.
 - For image cards, confirm the saved field references the actual media filename and preserves aspect ratio.
 - For mixed source roots, report which source IDs were touched and which were only inspected.
 - Report the checked deck name, problem count, changed note IDs when available, and any corrected problem numbers.
