@@ -53,17 +53,21 @@ Trap or contrast:<br>
 Guidelines:
 
 - Use solution material to confirm the answer, then write the explanation freshly.
-- For statement-evaluation prompts, explain each printed statement in order when the prompt asks for correct/incorrect statements.
-- For calculation prompts, show direct substitution before any mnemonic or shortcut.
+- Start the back with the final answer, then put the essential reasoning, formula, substitutions, and definitions in the main explanation. A reference or note section is only supplementary.
+- For statement-evaluation prompts, explain each printed statement in order when the prompt asks for correct/incorrect statements. The explanation must say why, not merely restate the choice.
+- For calculation prompts, show direct substitution before any mnemonic or shortcut. Split dense derivations into readable steps.
 - For interview/concept cards, include a model answer plus follow-up angle when it improves review value.
 - Use MathJax commands such as `\lt`, `\gt`, `\le`, and `\ge` instead of raw comparison symbols that may be parsed as HTML.
+- Do not leave literal renderer placeholders such as `Mathjax` or raw OCR junk in a saved field.
+- Preserve the reading order on fronts: prompt, needed figure or table, then choices. If OCR extracted answer choices before a `<보기>` block, reorder the front manually.
 
 ## Source Traceability
 
-When the note type has a source or extra field, store compact trace data:
+When the note type has a source or extra field, store compact trace data outside the review-facing front/back fields:
 
 ```text
 source_id=<id>; type=<source_type>; scope=<chapter/round/year/topic>; problem=03; page=<page id>; answer_checked=yes
 ```
 
 Do not store private absolute paths in public-facing fields unless the user explicitly wants local-only notes.
+If no hidden source field exists, use a human-readable source line such as `Source: ...` instead of visible debug metadata.

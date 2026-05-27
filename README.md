@@ -23,6 +23,7 @@ skills/
     references/
       card-patterns.md
       crop-workflow.md
+      quality-audit.md
       source-taxonomy.md
       source-details-template.md
     scripts/
