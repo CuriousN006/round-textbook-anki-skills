@@ -121,6 +121,8 @@ Copy-Item -Recurse -Force .\skills\round-textbook-anki "$env:USERPROFILE\.codex\
 
 그다음 Codex 세션을 새로 시작해 Skill 목록을 갱신합니다. 학습 자료 폴더, 교재, 장, 회차, 시험지, 번호가 붙은 문제 묶음으로 작업할 때 프롬프트에서 `$round-textbook-anki`를 요청하세요.
 
+설치 위치, 설정 파일, Anki 연결 방식이 헷갈린다면 이 README와 [`docs/anki-mcp-setup.md`](docs/anki-mcp-setup.md)를 자신이 사용하는 LLM 에이전트에게 보여 주고 물어보세요. 사용자의 운영체제, Anki 설치 방식, MCP 호스트 종류에 맞춰 더 구체적인 다음 단계를 안내받을 수 있습니다.
+
 ## Anki MCP 설정
 
 이 Skill은 카드 생성과 검증 절차를 계획할 수 있지만, Codex가 실제 Anki 컬렉션을 읽거나 수정하려면 로컬 Anki 브리지가 필요합니다.
