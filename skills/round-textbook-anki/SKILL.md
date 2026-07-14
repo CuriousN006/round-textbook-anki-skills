@@ -27,7 +27,7 @@ When the user gives only this repository URL or an unfamiliar environment:
 
 1. Read the repository-root `START_HERE.md`, this `SKILL.md`, and `docs/anki-mcp-setup.md`.
 2. Determine whether the current session can actually read files, run commands, and use local MCP tools. Do not claim local access from a chat-only environment.
-3. If the current session is chat-only, explain the limitation and guide the user to a tool-capable agent using current official product documentation. Ask only for operating system and GUI/terminal preference.
+3. If the current session is chat-only, explain the limitation and guide the user to a tool-capable agent using current official product documentation. Recommend the agent included with the service the user is already using first; offer other products only when the current service lacks the required capabilities or the user asks for alternatives. Ask only for the operating system and whether the user prefers clicking buttons or entering commands.
 4. If tool access exists, run `scripts/diagnose_environment.py` before proposing installations or configuration changes. This diagnosis is read-only.
 5. Do not clone the repository merely to read documentation when remote access is enough. Use a local checkout only when local scripts, source files, or Git changes require it.
 
@@ -74,7 +74,7 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 
 ## Workflow
 
-1. Run the read-only environment diagnosis and choose exactly one Anki bridge path. If packages or settings are missing, request approval before changing them.
+1. Run the read-only environment diagnosis and verify the native AnkiMCP endpoint at `http://127.0.0.1:3141`. If packages or settings are missing, request approval before changing them.
 2. Inventory the source set. List candidate PDFs, page counts, and type hints without copying private paths into public files.
 3. Pick the exact scope requested by the user: source, chapter/topic/round/year, problem range, and target deck.
 4. Inspect the current Anki collection with a harmless read action. Check whether matching decks or notes already exist before adding or updating anything.
@@ -119,7 +119,7 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 
 Treat any answer mismatch, wrong deck, duplicate note, missing note, wrong source scope, broken image reference, visible source/debug artifact, malformed MathJax, formula missing from `풀이`, or thin choice explanation as a blocker.
 
-- Re-read saved notes through Anki MCP or AnkiConnect after creating the first few notes of a new source or scope.
+- Re-read saved notes through native AnkiMCP after creating the first few notes of a new source or scope.
 - Treat the first 2-3 notes as a trial batch. Do not continue to the full write until their stored fields, deck, tags, images, and answers pass readback.
 - For a complete batch, compare every saved answer against the matching answer key or solution section before reporting completion.
 - For a complete batch, audit every saved note for searchable text fronts, missing/duplicate numbering, stale whole-page image references, source/debug artifacts, broken MathJax, answer lines that begin with bare MathJax, required formulas in `풀이`, and choice explanations that are too thin or merely repeat the choice.
