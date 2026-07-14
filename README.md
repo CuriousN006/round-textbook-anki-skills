@@ -83,13 +83,30 @@ Anki 동기화는 PC, 모바일, 웹에 흩어진 같은 덱을 AnkiWeb 계정 �
 - **MCP**: 에이전트와 외부 도구를 표준화된 방식으로 연결하는 규약입니다.
 - **Skill**: 특정 작업을 어떤 순서와 기준으로 수행할지 알려 주는 재사용 가능한 작업 지침입니다.
 
-이 저장소에서는 Codex가 에이전트 역할을 하고, `round-textbook-anki` Skill이 작업 절차를 제공하며, MCP 또는 AnkiConnect 연결이 실제 Anki Desktop과 상호작용하는 통로가 됩니다.
+이 README에서는 Codex를 기본 예시로 사용하지만, 에이전트 역할 자체가 Codex 한 제품에만 한정되는 것은 아닙니다. 기본 구성에서는 `round-textbook-anki` Skill이 작업 절차를 제공하고, MCP 또는 AnkiConnect 연결이 에이전트와 실제 Anki Desktop 사이의 통로가 됩니다.
 
 ### Codex란?
 
 Codex는 OpenAI의 코딩 및 작업 자동화 에이전트입니다. 이 저장소에서는 Codex가 사용자의 로컬 자료를 살펴보고, 문제를 카드로 나누고, OCR 결과를 정리하고, 이미지 크롭을 만들고, Anki에 저장된 노트를 다시 확인하는 작업을 일관된 절차로 수행하도록 지침을 제공합니다.
 
 중요한 점은 Codex가 이 저장소만으로 사용자의 Anki 앱이나 로컬 PDF에 자동 접근할 수 있는 것은 아니라는 점입니다. 실제 PDF 경로와 Anki 연결 설정은 사용자의 컴퓨터에서 별도로 구성해야 합니다.
+
+### Codex 외의 에이전트에서도 사용할 수 있나?
+
+원리상 가능합니다. 이 Skill의 핵심은 특정 언어 모델 전용 API가 아니라 사람이 읽을 수 있는 `SKILL.md`, 참고 문서, Python 스크립트, 그리고 MCP/AnkiConnect를 이용한 검증 절차입니다. 따라서 다음 조건을 갖춘 도구형 AI 에이전트라면 같은 작업 흐름을 적용할 수 있습니다.
+
+- 저장소의 `SKILL.md`와 참고 파일을 읽을 수 있어야 합니다.
+- 로컬 PDF와 스크립트에 접근하고 필요한 명령을 실행할 수 있어야 합니다.
+- Anki에 실제 노트를 저장하려면 MCP 또는 AnkiConnect 연결과 해당 권한이 있어야 합니다.
+- 노트 생성 후 저장된 결과를 다시 읽어 검증하는 절차를 따라야 합니다.
+
+대표적인 예는 다음과 같습니다.
+
+- **Codex**: 이 저장소가 기본 대상으로 삼고 현재 작업 흐름을 확인한 OpenAI 에이전트입니다.
+- **[Google Antigravity](https://antigravity.google/docs/overview)**: 파일 읽기·쓰기와 명령 실행을 수행하는 에이전트 플랫폼이며, [Agent Skills](https://antigravity.google/docs/skills)와 MCP를 공식 지원합니다. 따라서 이 저장소의 핵심 지침을 활용할 수 있을 것으로 예상합니다.
+- **[Claude Code](https://docs.anthropic.com/ko/docs/claude-code/overview)**: 파일을 편집하고 명령을 실행할 수 있는 Anthropic의 에이전틱 코딩 도구이며, Agent Skills와 MCP를 지원합니다. 같은 원리로 이 작업 흐름을 적용할 수 있을 것으로 예상합니다.
+
+> **호환성 상태:** 현재 이 저장소의 실제 작업 흐름은 Codex를 기준으로 작성하고 확인했습니다. Antigravity와 Claude Code에서는 아직 직접 시험하지 않았으므로 완전한 호환을 보장하지 않습니다. 제품마다 Skill 설치 위치, 자동 발견 방식, MCP 설정, 권한 승인 방식이 다를 수 있으며, `agents/openai.yaml` 같은 Codex 전용 메타데이터는 다른 에이전트가 무시할 수 있습니다. 다만 핵심 `SKILL.md`, 참고 문서와 스크립트는 원리상 재사용할 수 있습니다.
 
 ### MCP란?
 
