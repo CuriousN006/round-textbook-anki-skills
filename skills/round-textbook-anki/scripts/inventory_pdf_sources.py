@@ -13,7 +13,9 @@ try:
     from pypdf import PdfReader
 except ImportError as exc:  # pragma: no cover - import guard
     raise SystemExit(
-        "pypdf is required. Install it in the runtime used for this script."
+        "pypdf is required. After approval, run: "
+        "python -m pip install -r requirements.txt (from the repository root), "
+        "or python -m pip install pypdf."
     ) from exc
 
 

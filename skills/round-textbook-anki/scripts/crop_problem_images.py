@@ -14,7 +14,9 @@ try:
     from PIL import Image
 except ImportError as exc:  # pragma: no cover - import guard
     raise SystemExit(
-        "Pillow is required. Install it in the runtime used for this script."
+        "Pillow is required. After approval, run: "
+        "python -m pip install -r requirements.txt (from the repository root), "
+        "or python -m pip install Pillow."
     ) from exc
 
 
