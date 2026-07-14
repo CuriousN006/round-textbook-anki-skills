@@ -35,11 +35,11 @@ Anki는 보통 PC에서 카드를 만들고 정리한 뒤, 모바일에서는 �
 
 ### Anki 동기화는 어떻게 생각해야 하나?
 
-Anki 동기화는 PC, 모바일, 웹에 흩어진 같은 덱을 AnkiWeb 계정 기준으로 맞추는 과정입니다. 예를 들어 PC에서 Codex가 새 카드를 만든 뒤 Anki Desktop에서 동기화하면, 모바일 앱에서도 같은 카드를 내려받아 복습할 수 있습니다. 반대로 모바일에서 복습한 결과를 동기화하면 PC에서도 다음 복습 일정이 반영됩니다.
+Anki 동기화는 PC, 모바일, 웹에 흩어진 같은 덱을 AnkiWeb 계정 기준으로 맞추는 과정입니다. 예를 들어 PC에서 AI 에이전트가 새 카드를 만든 뒤 Anki Desktop에서 동기화하면, 모바일 앱에서도 같은 카드를 내려받아 복습할 수 있습니다. 반대로 모바일에서 복습한 결과를 동기화하면 PC에서도 다음 복습 일정이 반영됩니다.
 
 권장 흐름은 다음과 같습니다.
 
-1. PC의 Anki Desktop에서 덱을 만들거나 Codex/MCP로 노트를 추가합니다.
+1. PC의 Anki Desktop에서 덱을 만들거나 사용하는 AI 에이전트와 MCP로 노트를 추가합니다.
 2. Anki Desktop에서 동기화를 실행해 AnkiWeb에 업로드합니다.
 3. 모바일 앱에서 같은 AnkiWeb 계정으로 동기화해 새 카드와 미디어를 내려받습니다.
 4. 모바일에서 복습한 뒤 다시 동기화합니다.
@@ -110,19 +110,19 @@ Codex는 OpenAI의 코딩 및 작업 자동화 에이전트입니다. 이 저장
 
 ### MCP란?
 
-MCP(Model Context Protocol)는 AI 도구가 외부 프로그램이나 로컬 서비스와 안전하고 표준화된 방식으로 통신하기 위한 프로토콜입니다. 이 저장소의 맥락에서는 Codex가 Anki Desktop에 직접 접근하는 대신, MCP 서버나 AnkiConnect 같은 로컬 브리지를 통해 덱 목록을 읽고 노트를 만들거나 검증할 수 있게 합니다.
+MCP(Model Context Protocol)는 AI 도구가 외부 프로그램이나 로컬 서비스와 안전하고 표준화된 방식으로 통신하기 위한 프로토콜입니다. 이 저장소의 맥락에서는 Codex, Antigravity, Claude Code 같은 에이전트가 Anki Desktop에 직접 접근하는 대신, MCP 서버나 AnkiConnect 같은 로컬 브리지를 통해 덱 목록을 읽고 노트를 만들거나 검증할 수 있게 합니다.
 
 예를 들어 다음과 같은 구조가 가능합니다.
 
 ```text
-Codex 또는 MCP 호스트 → Anki MCP 서버 또는 AnkiConnect 래퍼 → Anki Desktop
+AI 에이전트 또는 MCP 호스트 → Anki MCP 서버 또는 AnkiConnect 래퍼 → Anki Desktop
 ```
 
 Anki 연결 설정은 환경마다 다르므로 자세한 내용은 [`docs/anki-mcp-setup.md`](docs/anki-mcp-setup.md)를 참고하세요.
 
 ### Skills란?
 
-Skills는 Codex가 특정 작업을 더 안정적으로 수행하도록 만드는 작업 지침 묶음입니다. 이 저장소의 `round-textbook-anki` Skill은 “여러 PDF 학습 자료를 확인하고, 문제를 정확히 식별하고, Anki 카드로 만들고, 저장 후 다시 검증하라”는 절차를 담고 있습니다.
+Skills는 Codex 같은 AI 에이전트가 특정 작업을 더 안정적으로 수행하도록 만드는 작업 지침 묶음입니다. 이 저장소의 `round-textbook-anki` Skill은 “여러 PDF 학습 자료를 확인하고, 문제를 정확히 식별하고, Anki 카드로 만들고, 저장 후 다시 검증하라”는 절차를 담고 있습니다.
 
 일반 프롬프트만으로도 카드를 만들 수는 있지만, Skill을 사용하면 다음과 같은 장점이 있습니다.
 
@@ -172,9 +172,9 @@ Copy-Item -Recurse -Force .\skills\round-textbook-anki "$env:USERPROFILE\.codex\
 
 ## Anki MCP 설정
 
-이 Skill은 카드 생성과 검증 절차를 계획할 수 있지만, Codex가 실제 Anki 컬렉션을 읽거나 수정하려면 로컬 Anki 브리지가 필요합니다.
+이 Skill은 카드 생성과 검증 절차를 계획할 수 있지만, 사용하는 AI 에이전트가 실제 Anki 컬렉션을 읽거나 수정하려면 로컬 Anki 브리지가 필요합니다.
 
-[`docs/anki-mcp-setup.md`](docs/anki-mcp-setup.md)는 “Codex가 내 PC의 Anki Desktop에 어떻게 연결되는가?”를 설명하는 로컬 연결 설정 문서입니다. 모바일 동기화 설명서가 아니라, Anki Desktop과 Codex/MCP 사이에 필요한 브리지 선택지, 포트, 설정 예시, 연결 확인, 문제 해결을 정리한 문서입니다.
+[`docs/anki-mcp-setup.md`](docs/anki-mcp-setup.md)는 “Codex가 내 PC의 Anki Desktop에 어떻게 연결되는가?”를 설명하는 로컬 연결 설정 문서입니다. 모바일 동기화 설명서가 아니라, Anki Desktop과 AI 에이전트/MCP 사이에 필요한 브리지 선택지, 포트, 설정 예시, 연결 확인, 문제 해결을 정리한 문서입니다.
 
 자세한 설정은 [`docs/anki-mcp-setup.md`](docs/anki-mcp-setup.md)를 읽어 보세요. 해당 문서에는 다음 내용이 포함되어 있습니다.
 
@@ -221,8 +221,8 @@ Anki 노트를 만들기 전에 생성된 매니페스트를 검토하고 필요
 1. 로컬 PDF 자료 폴더를 준비합니다.
 2. `source-details.local.md`에 개인 경로와 덱 이름을 기록합니다.
 3. `inventory_pdf_sources.py`로 자료 목록을 만들고 사람이 한 번 검토합니다.
-4. Codex에 `$round-textbook-anki` Skill 사용을 요청하면서 작업 범위, 회차, 장, 문제 번호를 명확히 지정합니다.
-5. Codex가 원문 페이지와 정답 근거를 확인한 뒤 Anki 카드 초안을 만듭니다.
+4. 사용하는 AI 에이전트에 `round-textbook-anki` Skill 사용을 요청하면서 작업 범위, 회차, 장, 문제 번호를 명확히 지정합니다.
+5. AI 에이전트가 원문 페이지와 정답 근거를 확인한 뒤 Anki 카드 초안을 만듭니다.
 6. MCP 또는 AnkiConnect 연결을 통해 PC의 Anki Desktop에 실제 노트를 저장합니다.
 7. 저장된 노트를 다시 읽어 정답, 태그, 덱, 이미지, 해설이 의도대로 들어갔는지 확인합니다.
 8. Anki Desktop에서 AnkiWeb으로 동기화한 뒤 모바일 앱에서도 동기화해 복습합니다.
