@@ -1,8 +1,54 @@
-# 교재·문제은행 Anki 카드 제작용 Codex Skill
+# 교재·문제은행 Anki 카드 제작용 AI 에이전트 Skill
 
-이 저장소는 교재, 문제집, 문제은행, 모의고사, 기출문제, 면접 대비 자료, 개념 PDF 같은 학습 자료를 검토 가능한 Anki 노트로 바꾸기 위한 공개 Codex Skill을 제공합니다.
+이 저장소는 교재, 문제집, 문제은행, 모의고사, 기출문제, 면접 대비 자료, 개념 PDF 같은 학습 자료를 검토 가능한 Anki 노트로 바꾸기 위한 공개 AI 에이전트 Skill을 제공합니다.
 
 저작권과 개인정보 보호를 위해 이 저장소에는 PDF 원본, 렌더링한 페이지 이미지, Anki 내보내기 파일, 컬렉션 미디어, 정답지, 로컬 컴퓨터 경로를 넣지 않습니다. 실제 자료 경로, 덱 이름, 개인별 작업 메모는 Git에서 무시되는 `source-details.local.md`에만 보관하세요.
+
+> **저장소 링크만 받으셨나요?** 일반 챗봇과 도구형 에이전트 모두 먼저 [`START_HERE.md`](START_HERE.md)를 읽으세요. 현재 환경 판별, 에이전트 선택, 공식 설치 문서, 권한 설정, 읽기 전용 진단, Anki 시험 실행까지 한 경로로 안내합니다.
+
+## 링크 하나로 시작하는 두 가지 경로
+
+### 현재 AI가 일반 챗봇인 경우
+
+일반 챗봇은 저장소를 설명하고 공식 설치 문서를 안내할 수 있지만, 사용자의 로컬 PDF를 읽거나 명령을 실행하거나 Anki Desktop에 카드를 저장할 수는 없습니다. 먼저 그 한계를 확인하고 사용자의 운영체제와 GUI/터미널 선호만 물은 뒤, Codex·Google Antigravity·Claude Code 같은 도구형 에이전트 선택지를 중립적으로 안내해야 합니다.
+
+다음 프롬프트와 이 저장소 URL을 일반 챗봇에 함께 전달하세요.
+
+```text
+이 저장소가 무엇을 하는지 읽어 줘.
+지금 너에게 내 컴퓨터의 파일을 읽거나 명령을 실행할 수 있는 에이전트 기능이 있는지 먼저 알려 줘.
+그 기능이 없다면 내 운영체제와 사용 방식에 맞는 도구형 AI 에이전트를 최신 공식 문서 기준으로 설치하도록 안내하고, 설치가 끝난 뒤 새 에이전트에 전달할 프롬프트를 만들어 줘.
+비밀번호나 API 키를 채팅에 붙여넣으라고 하지 마.
+```
+
+### 현재 AI가 이미 도구형 에이전트인 경우
+
+에이전트는 설치 설명을 건너뛰고 [`START_HERE.md`](START_HERE.md), 이 README, [`skills/round-textbook-anki/SKILL.md`](skills/round-textbook-anki/SKILL.md)를 읽은 뒤 읽기 전용 환경 진단부터 실행해야 합니다.
+
+```text
+이 저장소를 읽고 START_HERE.md부터 따라가 줘.
+내 환경을 먼저 읽기 전용으로 점검하고, 필요한 설치·다운로드·설정 변경·Anki 쓰기는 실행 전에 설명하고 승인을 받아.
+내 PDF 자료를 Anki 카드로 만들 준비가 되면 내가 알려 줘야 하는 정보만 쉬운 말로 한 번에 하나씩 질문해 줘.
+먼저 2~3개 시험 노트를 만들고 저장된 결과를 다시 확인한 뒤 전체 작업을 진행해 줘.
+```
+
+읽기 전용 진단 명령은 다음과 같습니다.
+
+```powershell
+python .\skills\round-textbook-anki\scripts\diagnose_environment.py
+```
+
+이 명령은 운영체제, Python 패키지, Node/`npx`, Anki 실행 여부, 로컬 포트, AnkiConnect `version` 응답만 확인하며 설치나 설정 변경, Anki 쓰기를 수행하지 않습니다.
+
+## 권한 설정 권장값
+
+작업 폴더 안의 읽기·쓰기와 정적 테스트는 자동 진행하되, 설치·다운로드·네트워크·작업 폴더 밖 쓰기·MCP 설정 변경·Anki 쓰기는 실행 전에 승인받는 구성을 권장합니다. 반복 승인을 줄이고 싶다면 전체 보호 장치를 끄기보다 제품이 제공하는 범위 제한 또는 자동 위험 검토를 사용하세요.
+
+- **Codex:** `Auto`/작업 폴더 쓰기와 필요 시 승인을 사용합니다. 지원되는 환경에서는 `approval_policy = "on-request"`와 `approvals_reviewer = "auto_review"` 조합으로 승인 요청을 자동 위험 검토에 맡길 수 있습니다.
+- **Antigravity:** 프로젝트 경계를 유지하고, 반복되는 안전한 읽기·테스트만 좁게 `Allow`, 설치·네트워크·MCP 쓰기는 `Ask`로 둡니다.
+- **Claude Code:** 기본 권한 확인을 유지하고 안전한 읽기·테스트만 `permissions.allow`에 추가합니다. 전체 권한 확인을 건너뛰는 옵션은 권장하지 않습니다.
+
+제품별 공식 문서와 Skill 위치는 [`docs/agent-onboarding.md`](docs/agent-onboarding.md)를 확인하세요.
 
 ## 이 저장소를 처음 보는 분을 위한 기본 개념
 
@@ -143,6 +189,11 @@ Skills는 Codex 같은 AI 에이전트가 특정 작업을 더 안정적으로 �
 ## 저장소 구조
 
 ```text
+START_HERE.md
+requirements.txt
+docs/
+  agent-onboarding.md
+  anki-mcp-setup.md
 skills/
   round-textbook-anki/
     SKILL.md
@@ -154,21 +205,38 @@ skills/
       source-taxonomy.md
       source-details-template.md
     scripts/
+      configure_local_source.py
       crop_problem_images.py
+      diagnose_environment.py
       inventory_pdf_sources.py
+tests/
+  test_bootstrap_tools.py
 ```
 
 ## 로컬 설치 방법
 
-이 저장소의 루트에서 다음 명령을 실행합니다.
+저장소 URL을 받은 에이전트는 자동 발견 위치에 복사하지 않아도 `skills/round-textbook-anki/SKILL.md`를 직접 읽어 현재 작업에 적용할 수 있습니다. 반복 사용을 위해 설치하려면 먼저 사용자에게 설치 위치와 변경 내용을 설명하고 승인을 받으세요.
+
+Codex의 현재 공식 사용자 범위 Skill 위치를 사용하는 PowerShell 예시는 다음과 같습니다.
 
 ```powershell
-Copy-Item -Recurse -Force .\skills\round-textbook-anki "$env:USERPROFILE\.codex\skills\round-textbook-anki"
+New-Item -ItemType Directory -Force "$HOME\.agents\skills" | Out-Null
+Copy-Item -Recurse -Force .\skills\round-textbook-anki "$HOME\.agents\skills\round-textbook-anki"
 ```
 
-그다음 Codex 세션을 새로 시작해 Skill 목록을 갱신합니다. 학습 자료 폴더, 교재, 장, 회차, 시험지, 번호가 붙은 문제 묶음으로 작업할 때 프롬프트에서 `$round-textbook-anki`를 요청하세요.
+Codex는 Skill 변경을 자동 감지하지만 목록에 나타나지 않으면 세션을 다시 시작합니다. 학습 자료 폴더, 교재, 장, 회차, 시험지, 번호가 붙은 문제 묶음으로 작업할 때 프롬프트에서 `$round-textbook-anki`를 요청하세요.
 
-설치 위치, 설정 파일, Anki 연결 방식이 헷갈린다면 이 README와 [`docs/anki-mcp-setup.md`](docs/anki-mcp-setup.md)를 자신이 사용하는 LLM 에이전트에게 보여 주고 물어보세요. 사용자의 운영체제, Anki 설치 방식, MCP 호스트 종류에 맞춰 더 구체적인 다음 단계를 안내받을 수 있습니다.
+Antigravity와 Claude Code의 자동 발견 위치는 서로 다릅니다. [`docs/agent-onboarding.md`](docs/agent-onboarding.md)의 공식 문서 링크를 현재 시점에 다시 확인하세요. `agents/openai.yaml`은 Codex/ChatGPT용 메타데이터이며 다른 에이전트가 무시할 수 있지만, 공통 `SKILL.md`, `references/`, `scripts/`는 직접 읽어 재사용할 수 있습니다.
+
+## Python 의존성
+
+저장소 수준의 런타임 의존성은 [`requirements.txt`](requirements.txt)에 명시되어 있습니다. `diagnose_environment.py`로 먼저 설치 여부를 확인하세요. `pypdf` 또는 `Pillow`가 없다면 에이전트는 설치 대상과 명령을 설명하고 승인을 받은 뒤 다음 명령을 실행할 수 있습니다.
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+진단과 로컬 설정 생성기는 Python 표준 라이브러리만 사용하므로 패키지 설치 전에도 실행할 수 있습니다.
 
 ## Anki MCP 설정
 
@@ -202,6 +270,14 @@ skills/round-textbook-anki/references/source-details.local.md
 
 첫 번째 로컬 매니페스트를 만들려면 다음 명령을 사용할 수 있습니다.
 
+초보자용 대화형 설정은 다음 명령으로 시작할 수 있습니다. 이 명령은 로컬 파일을 생성하므로 에이전트는 실행 전에 사용자 승인을 받아야 합니다.
+
+```powershell
+python .\skills\round-textbook-anki\scripts\configure_local_source.py
+```
+
+PDF 폴더를 직접 조사해 더 자세한 매니페스트를 만들려면 다음 명령을 사용할 수 있습니다.
+
 ```powershell
 python .\skills\round-textbook-anki\scripts\inventory_pdf_sources.py `
   --root "C:\path\to\study-pdfs" `
@@ -229,4 +305,4 @@ Anki 노트를 만들기 전에 생성된 매니페스트를 검토하고 필요
 
 ## 한 줄 요약
 
-이 저장소는 여러 종류의 학습 PDF를 안전하게 다루면서, 문제와 해설을 검증 가능한 Anki 카드로 바꾸기 위한 Codex Skill입니다.
+이 저장소는 여러 종류의 학습 PDF를 안전하게 다루면서, 문제와 해설을 검증 가능한 Anki 카드로 바꾸기 위한 AI 에이전트 Skill입니다.

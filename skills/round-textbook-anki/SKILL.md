@@ -21,6 +21,24 @@ Common source shapes include:
 
 Do not infer the source type, problem count, answer location, or deck structure from a previous project. Inspect the requested source set first.
 
+## Bootstrap From a Repository Link
+
+When the user gives only this repository URL or an unfamiliar environment:
+
+1. Read the repository-root `START_HERE.md`, this `SKILL.md`, and `docs/anki-mcp-setup.md`.
+2. Determine whether the current session can actually read files, run commands, and use local MCP tools. Do not claim local access from a chat-only environment.
+3. If the current session is chat-only, explain the limitation and guide the user to a tool-capable agent using current official product documentation. Ask only for operating system and GUI/terminal preference.
+4. If tool access exists, run `scripts/diagnose_environment.py` before proposing installations or configuration changes. This diagnosis is read-only.
+5. Do not clone the repository merely to read documentation when remote access is enough. Use a local checkout only when local scripts, source files, or Git changes require it.
+
+`agents/openai.yaml` is Codex/ChatGPT metadata. Other agents may ignore it. The portable core is `SKILL.md`, `references/`, and `scripts/`.
+
+## Approval Boundary
+
+Proceed without extra approval only for read-only inspection and actions already allowed inside the active workspace. Before installing programs or packages, downloading files, changing MCP or agent settings, writing outside the workspace, or creating/updating/deleting Anki notes, explain the exact action and request approval according to the host product's policy.
+
+Prefer scoped automatic approval or automatic risk review over disabling sandbox and approval protections. Never ask the user to paste passwords, API keys, or access tokens into chat. Never expose local Anki write access to the public internet.
+
 ## Source Configuration
 
 This public skill is path-neutral. Prefer local settings in `references/source-details.local.md` or a local JSON manifest when present. These files must stay git-ignored.
@@ -36,6 +54,8 @@ Common environment variables:
 - `ROUND_TEXTBOOK_RENDERED_IMAGE_DIR` for backward compatibility
 
 When a source root contains multiple PDFs, create or read a source manifest before building cards. Use `scripts/inventory_pdf_sources.py` for a first pass when page counts and filename-level classification are enough.
+
+If local source settings are missing, ask only for the PDF folder, desired parent deck, and target scope. After approval, `scripts/configure_local_source.py` can create git-ignored `source-details.local.md` and `source-manifest.local.json` drafts. Ask for an Anki profile or media directory only when the selected workflow actually needs it.
 
 ## Source Triage
 
@@ -54,16 +74,18 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 
 ## Workflow
 
-1. Inventory the source set. List candidate PDFs, page counts, and type hints without copying private paths into public files.
-2. Pick the exact scope requested by the user: source, chapter/topic/round/year, problem range, and target deck.
-3. Inspect the current Anki collection. Check whether matching decks or notes already exist before adding or updating anything.
-4. Verify the source pages. Confirm the header/banner, problem numbering, first/last problem in scope, and matching answer or explanation section.
-5. Choose the card pattern. Use multiple-choice, calculation, concept, image-first, cloze-like, or interview Q&A structure according to the source, not according to a fixed textbook template.
-6. Build notes with stable source traceability. Preserve local numbering conventions such as `01`, `02`, or original exam numbers.
-7. Use solution material only to confirm answers and reasoning. Write the back field in fresh teaching prose instead of copying long passages.
-8. Re-read saved notes from Anki and compare actual stored fields against the intended batch.
-9. If a user points out a card-quality failure, fix that card and then audit all cards with the same pattern, not only the one example.
-10. For correction passes, read the actual saved note text in Anki in order, in small batches, and judge the Front and Back semantically. Do not claim a quality pass from generated payloads, search results, or mechanical audits.
+1. Run the read-only environment diagnosis and choose exactly one Anki bridge path. If packages or settings are missing, request approval before changing them.
+2. Inventory the source set. List candidate PDFs, page counts, and type hints without copying private paths into public files.
+3. Pick the exact scope requested by the user: source, chapter/topic/round/year, problem range, and target deck.
+4. Inspect the current Anki collection with a harmless read action. Check whether matching decks or notes already exist before adding or updating anything.
+5. Verify the source pages. Confirm the header/banner, problem numbering, first/last problem in scope, and matching answer or explanation section.
+6. Choose the card pattern. Use multiple-choice, calculation, concept, image-first, cloze-like, or interview Q&A structure according to the source, not according to a fixed textbook template.
+7. Build 2-3 trial notes with stable source traceability. Preserve local numbering conventions such as `01`, `02`, or original exam numbers.
+8. Use solution material only to confirm answers and reasoning. Write the back field in fresh teaching prose instead of copying long passages.
+9. Re-read the trial notes from Anki and compare the actual stored Front, Back, deck, tags, image names, and answers against the intended batch. Continue to the full batch only when the trial passes.
+10. Re-read every saved note in the completed batch and compare actual stored fields against the intended batch.
+11. If a user points out a card-quality failure, fix that card and then audit all cards with the same pattern, not only the one example.
+12. For correction passes, read the actual saved note text in Anki in order, in small batches, and judge the Front and Back semantically. Do not claim a quality pass from generated payloads, search results, or mechanical audits.
 
 ## Card Rules
 
@@ -98,12 +120,14 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 Treat any answer mismatch, wrong deck, duplicate note, missing note, wrong source scope, broken image reference, visible source/debug artifact, malformed MathJax, formula missing from `풀이`, or thin choice explanation as a blocker.
 
 - Re-read saved notes through Anki MCP or AnkiConnect after creating the first few notes of a new source or scope.
+- Treat the first 2-3 notes as a trial batch. Do not continue to the full write until their stored fields, deck, tags, images, and answers pass readback.
 - For a complete batch, compare every saved answer against the matching answer key or solution section before reporting completion.
 - For a complete batch, audit every saved note for searchable text fronts, missing/duplicate numbering, stale whole-page image references, source/debug artifacts, broken MathJax, answer lines that begin with bare MathJax, required formulas in `풀이`, and choice explanations that are too thin or merely repeat the choice.
 - For correction work, use Anki readback as the authority. The pass is not complete until the stored Front and Back fields have been read and judged semantically.
 - For image cards, confirm the saved field references the actual media filename and preserves aspect ratio.
 - For mixed source roots, report which source IDs were touched and which were only inspected.
 - Report the checked deck name, problem count, changed note IDs when available, and any corrected problem numbers.
+- If real Anki or source PDFs were unavailable, report only the static or mocked checks that actually ran and list the remaining integration steps. Never imply cross-product or live-Anki compatibility from static tests.
 
 ## References
 

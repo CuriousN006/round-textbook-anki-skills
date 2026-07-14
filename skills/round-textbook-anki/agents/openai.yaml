@@ -1,7 +1,7 @@
 interface:
   display_name: "Textbook Problem Bank Anki"
   short_description: "Build verified Anki cards from mixed textbook PDF sets."
-  default_prompt: "Use $round-textbook-anki to inventory this textbook source set and create verified Anki notes."
+  default_prompt: "Use $round-textbook-anki. Read START_HERE.md, run the read-only environment diagnosis, request approval before installs or Anki writes, then create and verify 2-3 trial notes before the full batch."
 
 policy:
   allow_implicit_invocation: true

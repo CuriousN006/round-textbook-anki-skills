@@ -4,6 +4,18 @@ This skill tells Codex how to create and verify Anki notes, but it does not prov
 
 Use one of the setups below. Do not mix ports or configuration snippets from different Anki MCP variants unless you intentionally installed that variant.
 
+## Read-Only Diagnosis First
+
+Before installing a bridge or changing MCP settings, run the bundled read-only diagnostic from the repository root:
+
+```powershell
+python .\skills\round-textbook-anki\scripts\diagnose_environment.py
+```
+
+It checks the operating system, Python packages, Node/`npx`, whether Anki appears to be running, ports `3141` and `8765`, and the harmless AnkiConnect `version` action. It does not install software, change configuration, or write Anki notes. Use its recommendation to select one path below.
+
+Installing Anki, an add-on, Python packages, Node packages, or an MCP server and editing MCP configuration are state-changing actions. An agent must explain the exact change and obtain approval before performing them. A harmless deck-list read should succeed before any Anki write is allowed.
+
 ## Recommended Decision Path
 
 | Situation | Recommended setup | Local endpoint |
@@ -151,6 +163,8 @@ Use it directly only when your automation code already knows the AnkiConnect HTT
 5. The MCP host shows Anki tools.
 6. A harmless read action works, such as listing decks or reading deck names.
 7. Only after read verification, allow note creation or update workflows.
+8. Create only 2-3 trial notes first, then re-read their Front, Back, deck, tags, images, and answers.
+9. Continue to the full batch only after the trial readback passes.
 
 ## References
 

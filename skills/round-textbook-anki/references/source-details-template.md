@@ -7,6 +7,7 @@ Copy this file to `source-details.local.md` and fill it with private local detai
 - Source set nickname:
 - Local source root:
 - Parent deck:
+- Target scope (all/source/chapter/round/problem range):
 - Default note type:
 - Default tags:
 - Media directory:
@@ -87,6 +88,7 @@ For each source, record:
 - Existing Anki notes checked:
 - Saved note fields re-read after creation:
 - Saved answers compared against answer source:
+- First 2-3 trial notes re-read before full batch:
 
 ## Notes
 
