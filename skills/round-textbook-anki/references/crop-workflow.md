@@ -55,7 +55,7 @@ python .\skills\round-textbook-anki\scripts\crop_problem_images.py `
   --results .\work\crop-results.json
 ```
 
-Use `updated_front_html` from the result with Anki MCP or AnkiConnect update calls.
+Use `updated_front_html` from the result with native AnkiMCP update calls.
 
 ## Manual QA
 

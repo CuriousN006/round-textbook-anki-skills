@@ -5,7 +5,6 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,41 +23,20 @@ diagnose = load_module("diagnose_environment", SCRIPTS / "diagnose_environment.p
 configure = load_module("configure_local_source", SCRIPTS / "configure_local_source.py")
 
 
-class FakeResponse:
-    def __init__(self, payload: dict):
-        self.payload = json.dumps(payload).encode("utf-8")
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *_args):
-        return False
-
-    def read(self):
-        return self.payload
-
-
 class DiagnoseTests(unittest.TestCase):
-    def test_ankiconnect_version_uses_read_only_action(self):
-        with mock.patch.object(
-            diagnose.urllib.request,
-            "urlopen",
-            return_value=FakeResponse({"result": 6, "error": None}),
-        ) as urlopen:
-            result = diagnose.ankiconnect_version(0.1)
-
-        self.assertEqual(result, {"ok": True, "version": 6, "error": None})
-        request = urlopen.call_args.args[0]
-        self.assertEqual(json.loads(request.data), {"action": "version", "version": 6})
-
     def test_recommendation_prefers_native_mcp_when_3141_is_open(self):
         report = {
-            "ports": {"3141": True, "8765": False},
-            "ankiconnect": {"ok": False},
-            "commands": {"npx": {"available": False}},
+            "ports": {"3141": True},
             "anki_process_running": True,
         }
         self.assertIn("3141", diagnose.choose_recommendation(report))
+
+    def test_recommendation_points_to_native_addon_when_port_is_closed(self):
+        report = {
+            "ports": {"3141": False},
+            "anki_process_running": True,
+        }
+        self.assertIn("add-on", diagnose.choose_recommendation(report))
 
 
 class ConfigureTests(unittest.TestCase):
