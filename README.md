@@ -174,7 +174,7 @@ Copy-Item -Recurse -Force .\skills\round-textbook-anki "$env:USERPROFILE\.codex\
 
 이 Skill은 카드 생성과 검증 절차를 계획할 수 있지만, 사용하는 AI 에이전트가 실제 Anki 컬렉션을 읽거나 수정하려면 로컬 Anki 브리지가 필요합니다.
 
-[`docs/anki-mcp-setup.md`](docs/anki-mcp-setup.md)는 “Codex가 내 PC의 Anki Desktop에 어떻게 연결되는가?”를 설명하는 로컬 연결 설정 문서입니다. 모바일 동기화 설명서가 아니라, Anki Desktop과 AI 에이전트/MCP 사이에 필요한 브리지 선택지, 포트, 설정 예시, 연결 확인, 문제 해결을 정리한 문서입니다.
+[`docs/anki-mcp-setup.md`](docs/anki-mcp-setup.md)는 “AI 에이전트가 내 PC의 Anki Desktop에 어떻게 연결되는가?”를 설명하는 로컬 연결 설정 문서입니다. 모바일 동기화 설명서가 아니라, Anki Desktop과 AI 에이전트/MCP 사이에 필요한 브리지 선택지, 포트, 설정 예시, 연결 확인, 문제 해결을 정리한 문서입니다.
 
 자세한 설정은 [`docs/anki-mcp-setup.md`](docs/anki-mcp-setup.md)를 읽어 보세요. 해당 문서에는 다음 내용이 포함되어 있습니다.
 
