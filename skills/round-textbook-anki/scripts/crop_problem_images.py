@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -22,6 +23,10 @@ except ImportError as exc:  # pragma: no cover - import guard
 
 DEFAULT_STYLE = "max-width:100%; height:auto;"
 DEFAULT_INSERT_BEFORE_CANDIDATES = ("①", "1.", "1)", "(1)", "ㄱ.", "가.")
+# A choice marker only counts at the start of a line: the start of the field or
+# right after <br>, <div>, </div>, <p>, </p>, or a newline. This keeps markers
+# such as "1." from matching inside "01." or "1.5 kg".
+LINE_START_PATTERN = r"(?:^|<br\s*/?>|</?div[^>]*>|</?p[^>]*>|\n)\s*"
 
 
 def parse_args() -> argparse.Namespace:
@@ -79,6 +84,11 @@ def image_html(filename: str, style: str) -> str:
     return f'<div><img src="{filename}" style="{style}"></div><br>'
 
 
+def find_line_start_marker(front_html: str, marker: str) -> int:
+    match = re.search(LINE_START_PATTERN + "(" + re.escape(marker) + ")", front_html, re.IGNORECASE)
+    return match.start(1) if match else -1
+
+
 def insert_snippet(front_html: str, snippet: str, item: dict[str, Any]) -> str:
     insert_before = item.get("insert_before")
     insert_after = item.get("insert_after")
@@ -87,17 +97,17 @@ def insert_snippet(front_html: str, snippet: str, item: dict[str, Any]) -> str:
 
     if not insert_before and not insert_after:
         for marker in DEFAULT_INSERT_BEFORE_CANDIDATES:
-            idx = front_html.find(marker)
+            idx = find_line_start_marker(front_html, marker)
             if idx != -1:
                 return front_html[:idx] + snippet + front_html[idx:]
         markers = ", ".join(repr(marker) for marker in DEFAULT_INSERT_BEFORE_CANDIDATES)
-        raise ValueError(f"no default insert marker found; tried: {markers}")
+        raise ValueError(f"no default insert marker found at a line start; tried: {markers}")
 
     if insert_before:
         marker = str(insert_before)
-        idx = front_html.find(marker)
+        idx = find_line_start_marker(front_html, marker)
         if idx == -1:
-            raise ValueError(f"insert_before marker not found: {marker!r}")
+            raise ValueError(f"insert_before marker not found at a line start: {marker!r}")
         return front_html[:idx] + snippet + front_html[idx:]
 
     marker = str(insert_after)
