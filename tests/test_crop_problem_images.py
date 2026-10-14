@@ -89,6 +89,12 @@ class ProcessItemTests(unittest.TestCase):
         with Image.open(self.output_dir / "q01.png") as saved:
             self.assertEqual(saved.size, (50, 30))
 
+    def test_html_snippet_carries_actual_crop_size(self):
+        result = crop.process_item(self.item([10, 10, 60, 40]), self.output_dir, None, False)
+        self.assertEqual((result["width"], result["height"]), (50, 30))
+        self.assertIn('width="50" height="30"', result["html_snippet"])
+        self.assertIn("max-width:100%; height:auto;", result["html_snippet"])
+
 
 if __name__ == "__main__":
     unittest.main()

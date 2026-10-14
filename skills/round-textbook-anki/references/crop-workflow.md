@@ -9,7 +9,7 @@ The script can:
 - crop the relevant figure from a page image
 - save it with a stable filename
 - optionally copy it into Anki `collection.media`
-- generate an aspect-ratio-safe HTML snippet
+- generate an aspect-ratio-safe HTML snippet with the crop's actual `width` and `height`
 - optionally insert that snippet into an existing front field before or after a marker
 
 ## JSON Spec

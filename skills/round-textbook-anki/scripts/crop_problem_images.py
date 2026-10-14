@@ -90,8 +90,12 @@ def ensure_box_inside(box: tuple[int, int, int, int], size: tuple[int, int]) -> 
         )
 
 
-def image_html(filename: str, style: str) -> str:
-    return f'<div><img src="{filename}" style="{style}"></div><br>'
+def image_html(filename: str, style: str, size: tuple[int, int]) -> str:
+    width, height = size
+    return (
+        f'<div><img src="{filename}" width="{width}" height="{height}" '
+        f'style="{style}"></div><br>'
+    )
 
 
 def find_line_start_marker(front_html: str, marker: str) -> int:
@@ -151,6 +155,7 @@ def process_item(
         ensure_box_inside(crop_box, image.size)
         crop = image.crop(crop_box)
         crop.save(crop_path)
+        crop_size = crop.size
 
     media_path = None
     if media_dir is not None:
@@ -160,12 +165,14 @@ def process_item(
             raise FileExistsError(f"Refusing to overwrite existing media file: {media_path}")
         shutil.copy2(crop_path, media_path)
 
-    snippet = image_html(filename, style)
+    snippet = image_html(filename, style, crop_size)
     result: dict[str, Any] = {
         "note_id": item.get("note_id"),
         "filename": filename,
         "crop_path": str(crop_path),
         "media_path": str(media_path) if media_path else None,
+        "width": crop_size[0],
+        "height": crop_size[1],
         "html_snippet": snippet,
     }
 
