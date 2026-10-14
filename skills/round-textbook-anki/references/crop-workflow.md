@@ -8,7 +8,7 @@ The script can:
 
 - crop the relevant figure from a page image
 - save it with a stable filename
-- optionally copy it into Anki `collection.media`
+- optionally copy it into Anki `collection.media` (fallback only; prefer the AnkiMCP `store_media_file` tool)
 - generate an aspect-ratio-safe HTML snippet with the crop's actual `width` and `height`
 - optionally insert that snippet into an existing front field before or after a marker
 
@@ -51,11 +51,16 @@ Do not set both `insert_before` and `insert_after` in the same item.
 python .\skills\round-textbook-anki\scripts\crop_problem_images.py `
   --spec .\work\crops.json `
   --output-dir .\work\crops `
-  --media-dir "$env:ROUND_TEXTBOOK_MEDIA_DIR" `
   --results .\work\crop-results.json
 ```
 
-Use `updated_front_html` from the result with native AnkiMCP update calls.
+Then, for each result:
+
+1. Store the crop through AnkiMCP with `store_media_file`, passing `filename` and the absolute `crop_path` as `path`. This registers the file with Anki without knowing the profile folder, and the next sync uploads it.
+2. Confirm the returned filename matches `filename`. If Anki stored it under a different name, change the HTML snippet to the returned name.
+3. Use `updated_front_html` from the result with native AnkiMCP update calls.
+
+`--media-dir` copies files straight into `collection.media`. Use it only when the AnkiMCP media tool is unavailable, and point it at `$env:TEXTBOOK_ANKI_MEDIA_DIR`.
 
 ## Manual QA
 

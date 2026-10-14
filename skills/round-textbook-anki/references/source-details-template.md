@@ -23,6 +23,8 @@ $env:TEXTBOOK_ANKI_PARENT_DECK = "Mechanical Exam Prep"
 $env:TEXTBOOK_ANKI_MEDIA_DIR = "C:\path\to\Anki2\Profile\collection.media"
 ```
 
+`TEXTBOOK_ANKI_MEDIA_DIR` is optional. Media normally goes through the AnkiMCP `store_media_file` tool; the folder is only a fallback for `crop_problem_images.py --media-dir`.
+
 Backward-compatible single-source options:
 
 ```powershell

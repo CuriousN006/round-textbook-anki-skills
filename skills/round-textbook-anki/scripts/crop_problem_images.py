@@ -44,7 +44,10 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--media-dir",
-        help="Optional Anki collection.media directory to copy the cropped files into",
+        help=(
+            "Fallback only: Anki collection.media directory to copy the cropped files "
+            "into. Prefer the AnkiMCP store_media_file tool."
+        ),
     )
     parser.add_argument(
         "--results",

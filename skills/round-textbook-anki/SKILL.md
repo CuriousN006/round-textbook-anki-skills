@@ -48,7 +48,7 @@ Common environment variables:
 - `TEXTBOOK_ANKI_SOURCE_ROOT`
 - `TEXTBOOK_ANKI_SOURCE_MANIFEST`
 - `TEXTBOOK_ANKI_PARENT_DECK`
-- `TEXTBOOK_ANKI_MEDIA_DIR`
+- `TEXTBOOK_ANKI_MEDIA_DIR` (optional fallback; store media through the AnkiMCP `store_media_file` tool by default)
 - `ROUND_TEXTBOOK_PROBLEM_PDF` for backward compatibility
 - `ROUND_TEXTBOOK_SOLUTION_PDF` for backward compatibility
 - `ROUND_TEXTBOOK_RENDERED_IMAGE_DIR` for backward compatibility
@@ -113,6 +113,7 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 - When converting an image-only card to OCR text, remove old whole-problem image references and keep only focused visual crops that the learner actually needs.
 - For figure-dependent questions, do not replace the source figure with a text summary when the geometry, graph, table layout, or symbol placement affects the answer. Crop the focused figure and keep OCR text searchable around it.
 - Re-render at higher DPI before cropping if the crop is too small, blurry, or cut off.
+- Store crops in Anki with the AnkiMCP `store_media_file` tool instead of copying files into the profile's `collection.media` folder.
 - Do not generate or redraw technical diagrams from memory when the source figure is accuracy-sensitive. Use the source image or ask the user for the figure.
 
 ## Verification
