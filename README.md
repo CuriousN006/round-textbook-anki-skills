@@ -213,6 +213,7 @@ skills/
       inventory_pdf_sources.py
 tests/
   test_bootstrap_tools.py
+  test_crop_problem_images.py
 ```
 
 ## 로컬 설치 방법
@@ -267,7 +268,7 @@ skills/round-textbook-anki/references/source-details-template.md
 skills/round-textbook-anki/references/source-details.local.md
 ```
 
-이 파일에는 로컬 파일 경로, 덱 이름, 미디어 디렉터리, 자료별 주의사항을 적습니다. 이 파일은 커밋하지 마세요.
+이 파일에는 로컬 파일 경로, 덱 이름, 자료별 주의사항을 적습니다. 이미지 같은 미디어는 에이전트가 AnkiMCP로 직접 저장하므로 Anki 미디어 폴더 경로는 보통 적지 않아도 됩니다. 이 파일은 커밋하지 마세요.
 
 첫 번째 로컬 매니페스트를 만들려면 다음 명령을 사용할 수 있습니다.
 
@@ -300,9 +301,9 @@ Anki 노트를 만들기 전에 생성된 매니페스트를 검토하고 필요
 3. `inventory_pdf_sources.py`로 자료 목록을 만들고 사람이 한 번 검토합니다.
 4. 사용하는 AI 에이전트에 `round-textbook-anki` Skill 사용을 요청하면서 작업 범위, 회차, 장, 문제 번호를 명확히 지정합니다.
 5. AI 에이전트가 원문 페이지와 정답 근거를 확인한 뒤 Anki 카드 초안을 만듭니다.
-6. 네이티브 AnkiMCP 연결을 통해 PC의 Anki Desktop에 실제 노트를 저장합니다.
-7. 저장된 노트를 다시 읽어 정답, 태그, 덱, 이미지, 해설이 의도대로 들어갔는지 확인합니다.
-8. Anki Desktop에서 AnkiWeb으로 동기화한 뒤 모바일 앱에서도 동기화해 복습합니다.
+6. 여러 기기에서 동기화한다면 에이전트가 쓰기 전에 AnkiMCP로 먼저 동기화해 다른 기기의 변경을 받아 옵니다.
+7. 네이티브 AnkiMCP 연결을 통해 PC의 Anki Desktop에 시험 노트 2~3개를 먼저 저장하고, 다시 읽어 정답, 태그, 덱, 이미지, 해설이 의도대로 들어갔는지 확인한 뒤 나머지를 저장합니다.
+8. 검수가 끝나면 에이전트가 다시 동기화해 AnkiWeb에 올립니다. 모바일 앱에서도 동기화한 뒤 복습합니다.
 
 ## 한 줄 요약
 
