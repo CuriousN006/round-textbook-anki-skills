@@ -31,29 +31,30 @@ Find: <requested quantity>
 
 ## Back Field
 
+The back uses three sections, matching the card rules in `SKILL.md`: `정답` (answer), `풀이` (main solution), and `참고` (supplementary notes). Keep these Korean headings for Korean study material so every card in a collection reads the same way; for material in another language, translate the headings once and keep them consistent within the deck.
+
 ```html
-Answer: <final answer><br><br>
+정답: <final answer><br><br>
 
-Why:<br>
-<fresh explanation in teaching prose><br><br>
-
-Formula or principle:<br>
+풀이:<br>
+<fresh explanation in teaching prose><br>
 \[
   <main equation or definition>
 \]<br>
-
-Symbol meanings:<br>
 - \(a\): ...<br>
-- \(b\): ...<br><br>
+- \(b\): ...<br>
+<direct substitution, split into readable steps><br><br>
 
-Trap or contrast:<br>
-<common confusion, unit issue, sign convention, boundary condition, or adjacent concept>
+참고:<br>
+<common confusion, unit issue, sign convention, boundary condition, adjacent concept, or memory aid>
 ```
+
+`풀이` must hold everything needed to reach the answer: the reasoning, the formula or principle, every symbol's meaning, and the substitution. `참고` is optional and only adds traps, comparisons, unit checks, or memory aids. Drop it when there is nothing to add.
 
 Guidelines:
 
 - Use solution material to confirm the answer, then write the explanation freshly.
-- Start the back with the final answer, then put the essential reasoning, formula, substitutions, and definitions in the main explanation. A reference or note section is only supplementary.
+- Start the back with the final answer, then put the essential reasoning, formula, substitutions, and definitions in `풀이`. The `참고` section is only supplementary.
 - For statement-evaluation prompts, explain each printed statement in order when the prompt asks for correct/incorrect statements. The explanation must say why, not merely restate the choice.
 - For calculation prompts, show direct substitution before any mnemonic or shortcut. Split dense derivations into readable steps.
 - For interview/concept cards, include a model answer plus follow-up angle when it improves review value.

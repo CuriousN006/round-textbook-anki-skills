@@ -22,7 +22,7 @@ Use this before large correction passes and whenever a user reports poor cards. 
 - The main explanation contains the necessary formula, substitution, definition, classification rule, or mechanism.
 - Formula-heavy answers are split into readable steps.
 - Every symbol used in a formula is defined near the formula.
-- A reference or note section only adds traps, comparisons, unit checks, or memory aids; it must not hide the core solution.
+- The `참고` section only adds traps, comparisons, unit checks, or memory aids; it must not hide the core solution.
 - No literal placeholders remain, including `Mathjax`, `MathJax`, `source_id=`, `answer_checked=`, `problem=`, `page=`, or similar debug metadata.
 
 ## Choice And Statement Questions
@@ -38,6 +38,6 @@ Use this before large correction passes and whenever a user reports poor cards. 
 - A diagram was replaced by a text summary even though the graph, geometry, or symbol placement matters.
 - The card copied a textbook table as broken line fragments instead of rewriting the useful content.
 - The explanation merely repeats the printed choice.
-- The core formula appears only in a reference/note section.
+- The core formula appears only in `참고` instead of `풀이`.
 - Dense derivations are crammed into one line or one paragraph.
 - Generated cards still contain internal trace strings or renderer placeholders.
