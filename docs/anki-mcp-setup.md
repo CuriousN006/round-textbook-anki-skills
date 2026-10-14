@@ -83,6 +83,7 @@ A plain web request may return a protocol-level response such as `406` or `Missi
 8. Create only 2-3 trial notes first.
 9. Re-read their Front, Back, deck, tags, images, and answers.
 10. Continue to the full batch only after the trial readback passes.
+11. If the user syncs across devices, sync before the first write and again after the batch passes readback. On a full-sync conflict, cancel and ask the user which side to keep.
 
 ## References
 

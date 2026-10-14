@@ -77,7 +77,7 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 1. Run the read-only environment diagnosis and verify the native AnkiMCP endpoint at `http://127.0.0.1:3141`. If packages or settings are missing, request approval before changing them.
 2. Inventory the source set. List candidate PDFs, page counts, and type hints without copying private paths into public files.
 3. Pick the exact scope requested by the user: source, chapter/topic/round/year, problem range, and target deck.
-4. Inspect the current Anki collection with a harmless read action. Check whether matching decks or notes already exist before adding or updating anything.
+4. If the user syncs Anki across devices, run the AnkiMCP `sync` tool before any write so edits from other devices are present, and stop on a sync conflict instead of choosing a direction yourself. Then inspect the current Anki collection with a harmless read action. Check whether matching decks or notes already exist before adding or updating anything.
 5. Verify the source pages. Confirm the header/banner, problem numbering, first/last problem in scope, and matching answer or explanation section.
 6. Choose the card pattern. Use multiple-choice, calculation, concept, image-first, cloze-like, or interview Q&A structure according to the source, not according to a fixed textbook template.
 7. Build 2-3 trial notes with stable source traceability. Preserve local numbering conventions such as `01`, `02`, or original exam numbers.
@@ -86,6 +86,7 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 10. Re-read every saved note in the completed batch and compare actual stored fields against the intended batch.
 11. If a user points out a card-quality failure, fix that card and then audit all cards with the same pattern, not only the one example.
 12. For correction passes, read the actual saved note text in Anki in order, in small batches, and judge the Front and Back semantically. Do not claim a quality pass from generated payloads, search results, or mechanical audits.
+13. After the batch passes readback, run the AnkiMCP `sync` tool again when the user syncs across devices, and report its outcome. `NO_CHANGES` and `NORMAL_SYNC` both mean the sync finished.
 
 ## Card Rules
 
@@ -128,6 +129,7 @@ Treat any answer mismatch, wrong deck, duplicate note, missing note, wrong sourc
 - For correction work, use Anki readback as the authority. The pass is not complete until the stored Front and Back fields have been read and judged semantically.
 - For image cards, confirm the saved field references the actual media filename and preserves aspect ratio.
 - For mixed source roots, report which source IDs were touched and which were only inspected.
+- Report whether the final sync ran and its outcome, or that it was skipped because the user does not sync.
 - Report the checked deck name, problem count, changed note IDs when available, and any corrected problem numbers.
 - If real Anki or source PDFs were unavailable, report only the static or mocked checks that actually ran and list the remaining integration steps. Never imply cross-product or live-Anki compatibility from static tests.
 
