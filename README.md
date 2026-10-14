@@ -150,7 +150,7 @@ Codex는 OpenAI의 코딩 및 작업 자동화 에이전트입니다. 이 저장
 
 - **Codex**: 이 저장소가 기본 대상으로 삼고 현재 작업 흐름을 확인한 OpenAI 에이전트입니다.
 - **[Google Antigravity](https://antigravity.google/docs/overview)**: 파일 읽기·쓰기와 명령 실행을 수행하는 에이전트 플랫폼이며, [Agent Skills](https://antigravity.google/docs/skills)와 MCP를 공식 지원합니다. 따라서 이 저장소의 핵심 지침을 활용할 수 있을 것으로 예상합니다.
-- **[Claude Code](https://docs.anthropic.com/ko/docs/claude-code/overview)**: 파일을 편집하고 명령을 실행할 수 있는 Anthropic의 에이전틱 코딩 도구이며, Agent Skills와 MCP를 지원합니다. 같은 원리로 이 작업 흐름을 적용할 수 있을 것으로 예상합니다.
+- **[Claude Code](https://code.claude.com/docs/ko/overview)**: 파일을 편집하고 명령을 실행할 수 있는 Anthropic의 에이전틱 코딩 도구이며, Agent Skills와 MCP를 지원합니다. 같은 원리로 이 작업 흐름을 적용할 수 있을 것으로 예상합니다.
 
 제품을 고를 때는 현재 이용 중인 서비스를 우선합니다. ChatGPT에서 시작했다면 Codex나 ChatGPT 데스크톱의 에이전트 기능을, Claude에서 시작했다면 Claude Code를, Google 계열 서비스에서 시작했다면 그 서비스가 제공하는 에이전트 기능을 먼저 확인합니다. 필요한 기능이 없거나 사용자가 다른 선택지를 원할 때만 위 대안을 비교합니다.
 
@@ -252,7 +252,8 @@ python -m pip install -r requirements.txt
 - `http://127.0.0.1:3141`을 사용하는 네이티브 AnkiMCP 추가 기능 설정
 - Codex/MCP 설정 예시
 - PowerShell 연결 확인 명령
-- `502`, `connection refused`, 오래된 도구 목록, 연결 번호 혼동 문제 해결
+- 연결 번호가 닫혀 있을 때, 연결은 되는데 Anki 도구가 안 보일 때, 읽기가 실패할 때, 웹 요청이 프로토콜 오류를 낼 때의 문제 해결
+- 추가 기능을 파일로 설치해 Anki의 업데이트 확인에 잡히지 않을 때와, Anki 실행 중 덮어쓰기 설치가 중간에 실패할 때의 대처
 
 ## 개인 소스 설정
 
