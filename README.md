@@ -38,7 +38,7 @@
 python .\skills\round-textbook-anki\scripts\diagnose_environment.py
 ```
 
-이 명령은 운영체제, 필요한 Python 패키지, Anki 실행 여부, 내 컴퓨터 안의 Anki 연결 번호(`127.0.0.1:3141`)만 확인하며 설치나 설정 변경, Anki 쓰기를 수행하지 않습니다.
+이 명령은 운영체제, 필요한 Python 패키지, Anki 실행 여부, 내 컴퓨터 안의 Anki 연결 번호(`127.0.0.1:3141`), 설치된 AnkiMCP 추가 기능 버전만 확인하며 설치나 설정 변경, Anki 쓰기를 수행하지 않습니다.
 
 ## 권한 설정 권장값
 

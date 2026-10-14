@@ -55,7 +55,7 @@ python .\skills\round-textbook-anki\scripts\diagnose_environment.py
 python .\skills\round-textbook-anki\scripts\diagnose_environment.py --json
 ```
 
-이 진단은 파일이나 Anki 데이터를 수정하지 않습니다. 운영체제, Python과 필수 패키지, Anki 실행 여부, 그리고 내 컴퓨터 안에서 Anki 연결에 사용하는 번호 `3141`의 응답만 확인합니다.
+이 진단은 파일이나 Anki 데이터를 수정하지 않습니다. 운영체제, Python과 필수 패키지, Anki 실행 여부, 내 컴퓨터 안에서 Anki 연결에 사용하는 번호 `3141`의 응답, 그리고 설치된 AnkiMCP 추가 기능의 버전만 확인합니다.
 
 ## 4. 권한은 안전한 자동화로 설정하세요
 

@@ -16,7 +16,7 @@ Before installing the add-on or changing agent settings, run the bundled read-on
 python .\skills\round-textbook-anki\scripts\diagnose_environment.py
 ```
 
-It checks the operating system, Python packages, whether Anki appears to be running, and whether `127.0.0.1:3141` is reachable. It does not install software, change configuration, or write Anki notes.
+It checks the operating system, Python packages, whether Anki appears to be running, whether `127.0.0.1:3141` is reachable, and which AnkiMCP add-on version is installed and whether it came from AnkiWeb or a file. It does not install software, change configuration, or write Anki notes.
 
 Installing Anki, installing the add-on, or editing the agent's MCP configuration changes the computer. The agent must explain the exact change and obtain approval before performing it.
 
@@ -68,6 +68,7 @@ A plain web request may return a protocol-level response such as `406` or `Missi
 | Port `3141` is closed | Anki is closed, the add-on is missing, or the add-on did not start | Open Anki, select the profile, verify the add-on, then restart Anki |
 | Port `3141` responds but no Anki tools appear | The agent configuration was not loaded | Verify the endpoint in the agent settings and restart or refresh the agent |
 | Anki tools appear but reads fail | Anki is busy, the profile is locked, or the add-on is stale | Finish other Anki operations and restart Anki |
+| Anki's Check for Updates finds nothing but GitHub has a newer release | The add-on was installed from a `.ankiaddon` file, so Anki does not track it | Close Anki first, then install the new `.ankiaddon` or reinstall from AnkiWeb code `124672614`. Installing over a running add-on can fail halfway because Windows locks its loaded files |
 | A web request returns a protocol error | The endpoint expects MCP traffic rather than a browser request | Test with the agent's Anki tools instead of treating the web response as failure |
 
 ## Verification Checklist
