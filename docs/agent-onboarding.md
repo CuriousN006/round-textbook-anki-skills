@@ -47,7 +47,7 @@ Claude Code는 프로젝트의 `.claude/skills/<skill-name>/SKILL.md` 또는 사
 
 ## 호환성 경계
 
-이 저장소는 Codex 흐름을 중심으로 검증했습니다. Antigravity와 Claude Code는 공통 Agent Skills 형식과 MCP를 지원하지만 이 저장소의 실제 Anki 통합 시험은 아직 수행하지 않았습니다. 따라서 다음을 따르세요.
+이 저장소는 Codex 흐름을 중심으로 작성하고 검증했습니다. Claude Code(Windows 데스크톱 앱, AnkiMCP 0.40.0)에서는 2026-10-14에 직접 만든 합성 PDF로 전체 흐름을 실제 Anki에 시험했습니다. 환경 진단, 자료 조사, 쪽 렌더링, 그림 크롭, `store_media_file` 미디어 저장, 시험 노트 3개 추가, 저장된 노트 다시 읽기 검수까지 통과했고 시험 노트는 지웠습니다. Anki 화면에서 수식과 그림이 보이는 모습은 직접 확인하지 않았습니다. 스토어판 Windows 앱에서는 미디어를 파일 경로로 넘기면 Anki가 찾지 못할 수 있으니 [`crop-workflow.md`](../skills/round-textbook-anki/references/crop-workflow.md)의 base64 방법을 쓰세요. Antigravity는 공통 Agent Skills 형식과 MCP를 지원하지만 아직 실제 Anki 통합 시험을 하지 않았습니다. 따라서 다음을 따르세요.
 
 - 공통 `SKILL.md`, 참고 문서, Python 스크립트를 재사용합니다.
 - 제품 전용 메타데이터가 다른 제품에서도 작동한다고 가정하지 않습니다.

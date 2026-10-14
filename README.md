@@ -150,11 +150,11 @@ Codex는 OpenAI의 코딩 및 작업 자동화 에이전트입니다. 이 저장
 
 - **Codex**: 이 저장소가 기본 대상으로 삼고 현재 작업 흐름을 확인한 OpenAI 에이전트입니다.
 - **[Google Antigravity](https://antigravity.google/docs/overview)**: 파일 읽기·쓰기와 명령 실행을 수행하는 에이전트 플랫폼이며, [Agent Skills](https://antigravity.google/docs/skills)와 MCP를 공식 지원합니다. 따라서 이 저장소의 핵심 지침을 활용할 수 있을 것으로 예상합니다.
-- **[Claude Code](https://code.claude.com/docs/ko/overview)**: 파일을 편집하고 명령을 실행할 수 있는 Anthropic의 에이전틱 코딩 도구이며, Agent Skills와 MCP를 지원합니다. 같은 원리로 이 작업 흐름을 적용할 수 있을 것으로 예상합니다.
+- **[Claude Code](https://code.claude.com/docs/ko/overview)**: 파일을 편집하고 명령을 실행할 수 있는 Anthropic의 에이전틱 코딩 도구이며, Agent Skills와 MCP를 지원합니다. 합성 시험 자료로 실제 Anki에 카드를 만들고 다시 읽어 검수하는 전체 흐름을 확인했습니다.
 
 제품을 고를 때는 현재 이용 중인 서비스를 우선합니다. ChatGPT에서 시작했다면 Codex나 ChatGPT 데스크톱의 에이전트 기능을, Claude에서 시작했다면 Claude Code를, Google 계열 서비스에서 시작했다면 그 서비스가 제공하는 에이전트 기능을 먼저 확인합니다. 필요한 기능이 없거나 사용자가 다른 선택지를 원할 때만 위 대안을 비교합니다.
 
-> **호환성 상태:** 현재 이 저장소의 실제 작업 흐름은 Codex를 기준으로 작성하고 확인했습니다. Antigravity와 Claude Code에서는 아직 직접 시험하지 않았으므로 완전한 호환을 보장하지 않습니다. 제품마다 Skill 설치 위치, 자동 발견 방식, MCP 설정, 권한 승인 방식이 다를 수 있으며, `agents/openai.yaml` 같은 Codex 전용 메타데이터는 다른 에이전트가 무시할 수 있습니다. 다만 핵심 `SKILL.md`, 참고 문서와 스크립트는 원리상 재사용할 수 있습니다.
+> **호환성 상태:** 이 저장소의 작업 흐름은 Codex를 기준으로 작성하고 확인했습니다. Claude Code(Windows 데스크톱 앱)에서도 직접 만든 합성 PDF로 진단부터 시험 노트 저장, 다시 읽기 검수까지 실제 Anki에서 확인했습니다(2026-10-14, AnkiMCP 0.40.0). 다만 실제 교재 자료로 대량 작업을 한 것은 아니고, 시험한 환경이 아닌 곳에서는 동작이 다를 수 있습니다. 자세한 범위는 [`docs/agent-onboarding.md`](docs/agent-onboarding.md)를 보세요. Antigravity에서는 아직 직접 시험하지 않았으므로 완전한 호환을 보장하지 않습니다. 제품마다 Skill 설치 위치, 자동 발견 방식, MCP 설정, 권한 승인 방식이 다를 수 있으며, `agents/openai.yaml` 같은 Codex 전용 메타데이터는 다른 에이전트가 무시할 수 있습니다. 다만 핵심 `SKILL.md`, 참고 문서와 스크립트는 원리상 재사용할 수 있습니다.
 
 ### MCP란?
 
