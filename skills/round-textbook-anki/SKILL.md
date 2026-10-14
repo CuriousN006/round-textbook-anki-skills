@@ -68,7 +68,7 @@ For each selected source, identify:
 - organization: continuous numbers, chapters, topics, rounds, years/agencies, or Q&A sections
 - problem range and numbering convention
 - answer source: same PDF, separate solution PDF, answer key pages, explanation pages, or user-provided answer
-- deck path, tags, and source trace field convention
+- deck path, tags, and source trace field convention (see the tag rule below)
 
 If the source type is unclear, inspect page images directly. Do not rely only on extracted PDF text when layout matters.
 
@@ -89,6 +89,7 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 
 ## Card Rules
 
+- Tag at the source or scope level only, for example the source title, `past_exam`, or a round/chapter tag that groups many notes. Never create one tag per problem such as `<source>_001` or `q001`; per-problem identity belongs in the source/trace field or the visible source marker. Per-problem tags bloat the tag list into thousands of entries and make the tag browser unusable.
 - Keep front fields reviewable: source marker, problem statement or question, needed image, then choices or response format.
 - Keep front fields searchable: OCR or transcribe problem statements and choices into text. Do not embed the whole problem or page image as the review surface.
 - Keep back fields useful: answer, direct reasoning, formula or definition, symbol meanings, common trap, and a human-readable source line when available.

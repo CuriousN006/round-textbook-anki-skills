@@ -61,6 +61,13 @@ Guidelines:
 - Do not leave literal renderer placeholders such as `Mathjax` or raw OCR junk in a saved field.
 - Preserve the reading order on fronts: prompt, needed figure or table, then choices. If OCR extracted answer choices before a `<보기>` block, reorder the front manually.
 
+## Tags
+
+- Use a small, stable set of tags: source title, source type (`past_exam`, `problem_bank`, ...), and scope (round, chapter, year) when that scope groups many notes.
+- Workflow markers such as `OCR` or `answer_checked` are fine when they are applied to whole batches and removed once they stop being useful.
+- Do not create per-problem tags (`<source>_001`, `q001`). Keep the problem number in the trace field below or in the front's source marker.
+- Before adding a new tag family, list existing tags with the AnkiMCP `tag_list` tool and reuse a matching tag instead of inventing a near-duplicate.
+
 ## Source Traceability
 
 When the note type has a source or extra field, store compact trace data outside the review-facing front/back fields:
