@@ -56,7 +56,7 @@ python .\skills\round-textbook-anki\scripts\crop_problem_images.py `
 
 Then, for each result:
 
-1. Store the crop through AnkiMCP with `store_media_file`, passing `filename` and the absolute `crop_path` as `path`. This registers the file with Anki without knowing the profile folder, and the next sync uploads it.
+1. Store the crop through AnkiMCP with `store_media_file`, passing `filename` and `crop_path` (always an absolute path) as `path`. This registers the file with Anki without knowing the profile folder, and the next sync uploads it.
 2. Confirm the returned filename matches `filename`. If Anki stored it under a different name, change the HTML snippet to the returned name.
 3. Use `updated_front_html` from the result with native AnkiMCP update calls.
 

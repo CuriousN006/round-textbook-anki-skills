@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -94,6 +95,16 @@ class ProcessItemTests(unittest.TestCase):
         self.assertEqual((result["width"], result["height"]), (50, 30))
         self.assertIn('width="50" height="30"', result["html_snippet"])
         self.assertIn("max-width:100%; height:auto;", result["html_snippet"])
+
+    def test_crop_path_is_absolute_even_for_relative_output_dir(self):
+        cwd = os.getcwd()
+        os.chdir(self.temp_path)
+        try:
+            result = crop.process_item(self.item([10, 10, 60, 40]), Path("crops"), None, False)
+        finally:
+            os.chdir(cwd)
+        self.assertTrue(Path(result["crop_path"]).is_absolute())
+        self.assertTrue(Path(result["crop_path"]).exists())
 
 
 if __name__ == "__main__":

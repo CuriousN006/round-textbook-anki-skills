@@ -172,8 +172,8 @@ def process_item(
     result: dict[str, Any] = {
         "note_id": item.get("note_id"),
         "filename": filename,
-        "crop_path": str(crop_path),
-        "media_path": str(media_path) if media_path else None,
+        "crop_path": str(crop_path.resolve()),
+        "media_path": str(media_path.resolve()) if media_path else None,
         "width": crop_size[0],
         "height": crop_size[1],
         "html_snippet": snippet,
