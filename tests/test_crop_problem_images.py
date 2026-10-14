@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import importlib.util
+import tempfile
 import unittest
 from pathlib import Path
+
+from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,6 +63,31 @@ class InsertSnippetTests(unittest.TestCase):
             crop.insert_snippet("prompt END choices", SNIPPET, {"insert_after": "END"}),
             "prompt END<IMG> choices",
         )
+
+
+class ProcessItemTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.temp_path = Path(self.temp.name)
+        self.source = self.temp_path / "page.png"
+        Image.new("RGB", (100, 80), "white").save(self.source)
+        self.output_dir = self.temp_path / "crops"
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def item(self, box):
+        return {"source_image": str(self.source), "crop": box, "filename": "q01.png"}
+
+    def test_crop_outside_source_image_raises(self):
+        with self.assertRaises(ValueError):
+            crop.process_item(self.item([50, 40, 200, 200]), self.output_dir, None, False)
+        self.assertFalse((self.output_dir / "q01.png").exists())
+
+    def test_crop_inside_source_image_is_saved(self):
+        crop.process_item(self.item([10, 10, 60, 40]), self.output_dir, None, False)
+        with Image.open(self.output_dir / "q01.png") as saved:
+            self.assertEqual(saved.size, (50, 30))
 
 
 if __name__ == "__main__":

@@ -80,6 +80,16 @@ def ensure_crop_box(raw_box: Any) -> tuple[int, int, int, int]:
     return left, upper, right, lower
 
 
+def ensure_box_inside(box: tuple[int, int, int, int], size: tuple[int, int]) -> None:
+    left, upper, right, lower = box
+    width, height = size
+    if left < 0 or upper < 0 or right > width or lower > height:
+        raise ValueError(
+            f"crop {list(box)} falls outside the {width}x{height} source image; "
+            "Pillow would pad the missing area with black."
+        )
+
+
 def image_html(filename: str, style: str) -> str:
     return f'<div><img src="{filename}" style="{style}"></div><br>'
 
@@ -138,6 +148,7 @@ def process_item(
         raise FileExistsError(f"Refusing to overwrite existing crop: {crop_path}")
 
     with Image.open(source_image) as image:
+        ensure_box_inside(crop_box, image.size)
         crop = image.crop(crop_box)
         crop.save(crop_path)
 
