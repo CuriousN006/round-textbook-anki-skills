@@ -9,6 +9,7 @@ import json
 import os
 import platform
 import re
+import shutil
 import socket
 import subprocess
 import sys
@@ -19,6 +20,9 @@ from typing import Any
 REQUIRED_PACKAGES = {"pypdf": "pypdf", "PIL": "Pillow"}
 ANKIWEB_ADDON_ID = "124672614"
 ADDON_PACKAGE = "anki_mcp_server"
+# Page renderers, in preference order. pypdf extracts text but cannot render pages.
+RENDERER_COMMANDS = ("pdftoppm", "mutool")
+RENDERER_MODULES = {"fitz": "PyMuPDF", "pypdfium2": "pypdfium2"}
 VERSION_PATTERN = re.compile(r"""^__version__\s*=\s*["']([^"']+)["']""", re.MULTILINE)
 
 
@@ -68,6 +72,16 @@ def anki_process_running() -> bool | None:
         return completed.returncode == 0
     except (FileNotFoundError, OSError, subprocess.SubprocessError):
         return None
+
+
+def pdf_renderer() -> str | None:
+    for command in RENDERER_COMMANDS:
+        if shutil.which(command):
+            return command
+    for module, distribution in RENDERER_MODULES.items():
+        if importlib.util.find_spec(module) is not None:
+            return distribution
+    return None
 
 
 def default_addons_dir() -> Path | None:
@@ -136,8 +150,18 @@ def update_note(report: dict[str, Any]) -> str:
     )
 
 
+def renderer_note(report: dict[str, Any]) -> str:
+    if "pdf_renderer" not in report or report["pdf_renderer"]:
+        return ""
+    return (
+        " No PDF page renderer was found (pdftoppm, mutool, PyMuPDF, or pypdfium2); "
+        "ask for approval before installing one, because page images are needed for "
+        "layout checks and figure crops."
+    )
+
+
 def choose_recommendation(report: dict[str, Any]) -> str:
-    return _base_recommendation(report) + update_note(report)
+    return _base_recommendation(report) + update_note(report) + renderer_note(report)
 
 
 def _base_recommendation(report: dict[str, Any]) -> str:
@@ -157,6 +181,7 @@ def build_report(timeout: float) -> dict[str, Any]:
             "supported": sys.version_info >= (3, 10),
         },
         "packages": package_status(),
+        "pdf_renderer": pdf_renderer(),
         "anki_process_running": anki_process_running(),
         "ports": {"3141": port_open(3141, timeout)},
         "ankimcp_addon": addon_status(default_addons_dir()),
@@ -173,6 +198,7 @@ def print_human(report: dict[str, Any]) -> None:
     )
     for package, available in report["packages"].items():
         print(f"PACKAGE {package}={'ok' if available else 'missing'}")
+    print(f"PDF_RENDERER={report['pdf_renderer'] or 'missing'}")
     running = report["anki_process_running"]
     print(f"ANKI_PROCESS={running if running is not None else 'unknown'}")
     print(f"PORT 3141={'open' if report['ports']['3141'] else 'closed'}")

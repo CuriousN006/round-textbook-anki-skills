@@ -2,6 +2,14 @@
 
 Use `scripts/crop_problem_images.py` after visually deciding the crop box from a rendered page image.
 
+Render the page first with the renderer reported by `diagnose_environment.py`, for example:
+
+```powershell
+pdftoppm -r 150 -png .\source.pdf .\work\rendered\page
+```
+
+Crop coordinates are pixels in that rendered image, so keep the same DPI for rendering and cropping. Re-render at a higher DPI when a figure is too small.
+
 Crop only visuals that are needed to answer or understand the card: figures, graphs, tables, formula boxes, symbol legends, or layout-sensitive prompts. Do not crop a whole problem or page just to avoid OCR.
 
 The script can:

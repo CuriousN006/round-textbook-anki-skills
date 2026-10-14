@@ -80,6 +80,20 @@ class DiagnoseTests(unittest.TestCase):
         report["ankimcp_addon"]["install_source"] = "ankiweb"
         self.assertNotIn("Check for Updates", diagnose.choose_recommendation(report))
 
+    def test_recommendation_flags_missing_pdf_renderer(self):
+        report = {"ports": {"3141": True}, "anki_process_running": True, "pdf_renderer": None}
+        self.assertIn("renderer", diagnose.choose_recommendation(report))
+        report["pdf_renderer"] = "pdftoppm"
+        self.assertNotIn("renderer", diagnose.choose_recommendation(report))
+
+    def test_pdf_renderer_prefers_command_line_tools(self):
+        original_which = diagnose.shutil.which
+        try:
+            diagnose.shutil.which = lambda name: "/usr/bin/mutool" if name == "mutool" else None
+            self.assertEqual(diagnose.pdf_renderer(), "mutool")
+        finally:
+            diagnose.shutil.which = original_which
+
 
 class ConfigureTests(unittest.TestCase):
     def test_writes_git_ignored_local_draft_without_pdf_contents(self):

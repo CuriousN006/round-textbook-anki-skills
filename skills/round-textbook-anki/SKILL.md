@@ -109,6 +109,7 @@ If the source type is unclear, inspect page images directly. Do not rely only on
 
 ## Image and OCR Rules
 
+- Render pages to images before judging layout. `pypdf` extracts text but cannot render; use the renderer the diagnosis reports, for example `pdftoppm -r 150 -png <pdf> <prefix>` (Poppler), `mutool draw`, PyMuPDF, or pypdfium2. If none is installed, request approval before installing one.
 - Read the problem from page images first when the PDF layout contains figures, tables, columns, answer choices, or page banners.
 - Mark OCR-derived fronts with `[OCR]` when the text may need later cleanup.
 - Crop only the figure, formula box, table, graph, or prompt area needed for review. Do not crop the entire problem/page just to avoid OCR.

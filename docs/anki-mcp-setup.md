@@ -16,7 +16,7 @@ Before installing the add-on or changing agent settings, run the bundled read-on
 python .\skills\round-textbook-anki\scripts\diagnose_environment.py
 ```
 
-It checks the operating system, Python packages, whether Anki appears to be running, whether `127.0.0.1:3141` is reachable, and which AnkiMCP add-on version is installed and whether it came from AnkiWeb or a file. It does not install software, change configuration, or write Anki notes.
+It checks the operating system, Python packages, whether Anki appears to be running, whether a PDF page renderer is available, whether `127.0.0.1:3141` is reachable, and which AnkiMCP add-on version is installed and whether it came from AnkiWeb or a file. It does not install software, change configuration, or write Anki notes.
 
 Installing Anki, installing the add-on, or editing the agent's MCP configuration changes the computer. The agent must explain the exact change and obtain approval before performing it.
 
