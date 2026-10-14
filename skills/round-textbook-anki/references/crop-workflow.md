@@ -60,6 +60,12 @@ Then, for each result:
 2. Confirm the returned filename matches `filename`. If Anki stored it under a different name, change the HTML snippet to the returned name.
 3. Use `updated_front_html` from the result with native AnkiMCP update calls.
 
+If `store_media_file` reports `File not found` for a path that exists, the agent and Anki see different file systems. This happens when the agent runs sandboxed: for example, the Microsoft Store build of the Claude desktop app on Windows virtualizes `%APPDATA%`, so its `AppData\Roaming\...` paths really live under `AppData\Local\Packages\<app>\LocalCache\Roaming\...`, which Anki cannot see under the original name. Do not guess paths. Pass the file content instead: base64-encode the crop and call `store_media_file` with `filename` and `data` in place of `path`. This works regardless of where the agent runs.
+
+```powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("<crop_path>"))
+```
+
 `--media-dir` copies files straight into `collection.media`. Use it only when the AnkiMCP media tool is unavailable, and point it at `$env:TEXTBOOK_ANKI_MEDIA_DIR`.
 
 ## Manual QA
